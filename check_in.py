@@ -6,13 +6,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-
-df = pd.DataFrame(
-    {
-        "Name": ["David Weirich", "Edward", "Weirich"],
-        "Last Contacted": ["2020-01-01", "2020-01-02", "2020-02-19"],
-    }
-)
+df = pd.read_csv('people.csv')
 
 
 def update_df():
@@ -22,6 +16,8 @@ def update_df():
     df["Last Contacted"] = pd.to_datetime(df["Last Contacted"])
     df["Days Since"] = (pd.Timestamp.now() - df['Last Contacted']).apply(lambda x: x.days)
 
+    df.drop('Days Since', axis=1).to_csv('people.csv', index=False)
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -30,7 +26,7 @@ def home():
     if request.method == 'POST':
         idx = int(request.form.get('update'))
 
-        print('Clicked on', idx)
+        print('Clicked on', df.loc[idx, 'Name'])
 
         df.loc[idx, 'Last Contacted'] = pd.Timestamp.now()
 

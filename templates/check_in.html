@@ -22,15 +22,23 @@
                 <th>Name</th>
                 <th>Last Contacted</th>
                 <th>Days Since Check In</th>
+                <th>Cadence</th>
                 <th>Button</th>
             </tr>
             </thead>
             <tbody>
             {% for idx in df.index %}
+            {% if df.loc[idx, 'Days Since'] > df.loc[idx, 'Cadence'] %}
+            <tr class="table-danger">
+            {% elif df.loc[idx, 'Days Since'] == df.loc[idx, 'Cadence'] %}
+            <tr class="table-warning">
+            {% else %}
             <tr>
-                <td>{{ df['Name'][idx] }}</td>
-                <td>{{ df['Last Contacted'][idx].strftime('%A, %B %d, %Y, %I:%M %p') }}</td>
-                <td>{{ df['Days Since'][idx] }}</td>
+            {% endif %}
+                <td>{{ df.loc[idx, 'Name'] }}</td>
+                <td>{{ df.loc[idx, 'Last Contacted'].strftime('%A, %B %d, %Y, %I:%M %p') }}</td>
+                <td>{{ df.loc[idx, 'Days Since'] }}</td>
+                <td>{{ df.loc[idx, 'Cadence'] }}</td>
                 <td>
                     <button type="submit" name="update" value="{{ idx }}" class="btn btn-primary" >
                         Contacted!
