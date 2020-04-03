@@ -12,26 +12,33 @@
 </head>
 <body>
 <div class="jumbotron">
-    <h1>Check in on me!</h1> </div>
+    <h1>Check In On Me</h1>
+</div>
 <div class="container">
-    <table border="0" class="table table-striped">
-        <thead>
-        <tr style="text-align: unset;">
-            {% for col in df %}
-                <th>{{ col }}</th>
+    <form method="post" action="/">
+        <table class="table">
+            <thead>
+            <tr style="text-align: unset;">
+                <th>Name</th>
+                <th>Last Contacted</th>
+                <th>Button</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for idx in df.index %}
+            <tr>
+                <td>{{ df['Name'][idx] }}</td>
+                <td>{{ df['Last Contacted'][idx] }}</td>
+                <td>
+                    <button type="submit" name="update" value="{{ df['Name'][idx] }}" class="btn btn-primary" >
+                        Contacted!
+                    </button>
+                </td>
+            </tr>
             {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for idx in df.index %}
-        <tr>
-            {% for col in df %}
-            <td>{{ df[col][idx] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </form>
 </div>
 
 <!-- Optional JavaScript -->
