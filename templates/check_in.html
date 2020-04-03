@@ -21,6 +21,7 @@
             <tr style="text-align: unset;">
                 <th>Name</th>
                 <th>Last Contacted</th>
+                <th>Days Since Check In</th>
                 <th>Button</th>
             </tr>
             </thead>
@@ -29,6 +30,7 @@
             <tr>
                 <td>{{ df['Name'][idx] }}</td>
                 <td>{{ df['Last Contacted'][idx].strftime('%A, %B %d, %Y, %I:%M %p') }}</td>
+                <td>{{ df['Days Since'][idx] }}</td>
                 <td>
                     <button type="submit" name="update" value="{{ idx }}" class="btn btn-primary" >
                         Contacted!

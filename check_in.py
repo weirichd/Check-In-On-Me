@@ -14,7 +14,13 @@ df = pd.DataFrame(
     }
 )
 
-df["Last Contacted"] = pd.to_datetime(df["Last Contacted"])
+
+def update_df():
+    global df
+
+    df = df.sort_values('Last Contacted')
+    df["Last Contacted"] = pd.to_datetime(df["Last Contacted"])
+    df["Days Since"] = (pd.Timestamp.now() - df['Last Contacted']).apply(lambda x: x.days)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -28,10 +34,12 @@ def home():
 
         df.loc[idx, 'Last Contacted'] = pd.Timestamp.now()
 
-        df = df.sort_values('Last Contacted')
+        update_df()
 
     return render_template("check_in.html", df=df)
 
 
 if __name__ == "__main__":
+    update_df()
+
     app.run(debug=True)
