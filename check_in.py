@@ -22,7 +22,13 @@ def home():
     global df
 
     if request.method == 'POST':
-        print('Clicked on', request.form.get('update'))
+        idx = int(request.form.get('update'))
+
+        print('Clicked on', idx)
+
+        df.loc[idx, 'Last Contacted'] = pd.Timestamp.now()
+
+        df = df.sort_values('Last Contacted')
 
     return render_template("check_in.html", df=df)
 

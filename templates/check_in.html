@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Data Frame</title>
+    <title>Check In On Me</title>
 </head>
 <body>
 <div class="jumbotron">
@@ -28,9 +28,9 @@
             {% for idx in df.index %}
             <tr>
                 <td>{{ df['Name'][idx] }}</td>
-                <td>{{ df['Last Contacted'][idx] }}</td>
+                <td>{{ df['Last Contacted'][idx].strftime('%A, %B %d, %Y, %I:%M %p') }}</td>
                 <td>
-                    <button type="submit" name="update" value="{{ df['Name'][idx] }}" class="btn btn-primary" >
+                    <button type="submit" name="update" value="{{ idx }}" class="btn btn-primary" >
                         Contacted!
                     </button>
                 </td>
