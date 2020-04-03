@@ -6,9 +6,13 @@ import pandas as pd
 app = Flask(__name__)
 
 
-df = pd.DataFrame({"Name": ["David", "Edward", "Weirich"], "Number": [1, 2, 10],})
-
-df["Button"] = '<button type="button" class="btn btn-primary">Click Me</button>'
+df = pd.DataFrame(
+    {
+        "Name": ["David", "Edward", "Weirich"],
+        "Last Contacted": ["2020-01-01", "2020-01-02", "2020-02-19"],
+    }
+)
+df["Last Contacted"] = pd.to_datetime(df["Last Contacted"])
 
 
 @app.route("/", methods=["GET", "POST"])
