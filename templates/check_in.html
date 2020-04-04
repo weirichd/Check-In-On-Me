@@ -16,7 +16,7 @@
 </div>
 <div class="container">
     <form method="post" action="/">
-        <table class="table">
+        <table class="table table-striped">
             <thead>
             <tr style="text-align: unset;">
                 <th>Name</th>
@@ -48,6 +48,10 @@
             {% endfor %}
             </tbody>
         </table>
+        <br />
+        <button type="submit" name="reload" value="reload" class="btn btn-success" >
+            Reload
+        </button>
     </form>
 </div>
 
